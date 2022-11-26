@@ -1,0 +1,32 @@
+.homepage {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.home-div {
+    min-height: 80vh;
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.display-4 {
+    background: -webkit-linear-gradient(#198754, #63D471);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.para1 {
+    text-align: center;
+    max-width: 60%;
+    margin: auto;
+}
+
+@media only screen and (max-width: 700px) {
+    .para1 {
+        max-width: 90%;
+    }
+}

@@ -1,0 +1,8 @@
+footer {
+    position: relative;
+    top: 5vh;
+}
+
+.footer-text {
+    font-weight: 900;
+}

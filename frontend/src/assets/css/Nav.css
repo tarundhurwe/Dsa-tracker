@@ -1,0 +1,20 @@
+.navbar {
+    background-color: #198754 !important;
+}
+
+.tag {
+    color: white;
+    font-weight: 900;
+}
+
+.nav-icon {
+    margin-left: 5px;
+}
+
+.on-hover:hover {
+    background-color: #106e42;
+}
+
+.site-logo {
+    height: 25px;
+}

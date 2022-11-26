@@ -1,0 +1,38 @@
+.button {
+    display: flex;
+    justify-content: center;
+}
+
+.display-4 {
+    font-weight: 900;
+}
+
+.card {
+    width: 40vw;
+    box-shadow: 4px 4px 4px #75ce9f;
+}
+
+.card-text {
+    text-align: center;
+}
+
+.progress {
+    box-shadow: 2px 2px 5px #198754;
+}
+
+.btn {
+    border: none;
+    background-color: #198754 !important;
+    box-shadow: none !important;
+}
+
+.card-header {
+    background-color: #198754;
+    color: white;
+}
+
+@media only screen and (max-width: 700px) {
+    .card {
+        width: 80vw;
+    }
+}
