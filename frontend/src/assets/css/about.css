@@ -1,0 +1,16 @@
+.about-div {
+    min-height: 80vh;
+}
+
+.about-div .para {
+    width: 60vw;
+    margin: auto;
+    font-weight: 400;
+}
+
+
+@media only screen and (max-width: 700px) {
+    .para1 {
+        max-width: 90%;
+    }
+}

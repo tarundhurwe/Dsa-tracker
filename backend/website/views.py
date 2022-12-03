@@ -2,16 +2,12 @@ from flask import Blueprint, jsonify
 from flask_login import current_user
 import sqlite3 as sql
 from os.path import join, dirname
+from .db_connection import DatabaseConnection
 
 views = Blueprint("views", __name__)
 
 
-def get_db():
-    conn = sql.connect(join(dirname(__file__), "database.db"))
-    cur = conn.cursor()
-    return conn, cur
-
-
+db = DatabaseConnection()
 """ Views for problems """
 
 """ Return list of names of available problem sets"""
@@ -21,7 +17,7 @@ def get_db():
 def problem_sets():
     try:
         available_problem_sets = []
-        _, curr = get_db()
+        _, curr = db.database_connection()
         curr.execute("""SELECT DISTINCT problem_set_name FROM problems""")
         data = curr.fetchall()
         for i in range(len(data)):
@@ -43,9 +39,10 @@ def problem_sets():
 
 @views.route("/all")
 def home():
-    _, cur = get_db()
+    _, cur = db.database_connection()
     cur.execute("""SELECT * FROM problems""")
     data = cur.fetchall()
+    print(data[0])
     problems = [
         {
             "id": ele[0],
@@ -82,7 +79,7 @@ def sort_by_problem_set(name, tag):
         else:
             query = f"SELECT * FROM problems WHERE problem_set_name = '{name}'"
 
-        _, cur = get_db()
+        _, cur = db.database_connection()
         cur.execute(query)
         data = cur.fetchall()
         problems = [

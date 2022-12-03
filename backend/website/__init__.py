@@ -19,10 +19,12 @@ def create_app():
     from .views import views
     from .auth import auth
     from .notes import notes
+    from .profiles import profile
 
     app.register_blueprint(views, url_prefix="/")
     app.register_blueprint(auth, url_prefix="/auth")
     app.register_blueprint(notes, url_prefix="/notes")
+    app.register_blueprint(profile, url_prefix="/profile")
 
     from .models import Notes, User
 

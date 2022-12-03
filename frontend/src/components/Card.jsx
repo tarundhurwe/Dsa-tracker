@@ -5,7 +5,7 @@ import '../assets/css/Card.css'
 export const Card = ({ dataset }) => {
     return (
 
-        <div className="card m-3">
+        <div className="card mt-2 mb-3">
             <div className="card-header">
                 <h5 className="card-title" style={{ marginBottom: "0px", textAlign: "center" }}>{dataset.name}</h5>
             </div>

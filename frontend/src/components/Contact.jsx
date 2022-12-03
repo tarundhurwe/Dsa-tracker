@@ -12,7 +12,7 @@ export const Contact = () => {
                 <div className="heading" style={{ textAlign: 'center' }}><h1 className="display-4">Get in touch</h1></div>
                 <div className="para">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, atque?</div>
             </div>
-            <div className='contact-form mt-5'>
+            <div className='contact-form mt-5 mb-4'>
                 <div className="card contact-card">
                     <div className="card-header contact-card-header">Contact us</div>
                     <form action="">
