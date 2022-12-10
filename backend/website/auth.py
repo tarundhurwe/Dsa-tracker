@@ -6,7 +6,11 @@ from flask_login import login_user, login_required, logout_user, current_user
 from .models import User
 from os.path import join, dirname
 import sqlite3 as sql
+from constants.auth_constant import AuthObject
+from .db_connection import DatabaseConnection
 
+auth_obj = AuthObject()
+database = DatabaseConnection()
 auth = Blueprint("auth", __name__)
 
 
@@ -43,8 +47,7 @@ def login():
         login_data = request.get_json()
         email = login_data["email"]
         password = login_data["password"]
-        user = User.query.filter_by(email=email).first()
-        if user:
+        if user := User.query.filter_by(email=email).first():
             if check_password_hash(user.password, password):
                 login_user(user, remember=True)
                 return jsonify({"status": "logged in successfully"})
@@ -52,7 +55,7 @@ def login():
                 return jsonify({"status": "incorrect password"})
         else:
             return jsonify({"status": "user doesn't exist"})
-    elif request.method == "POST" and current_user.is_authenticated:
+    elif request.method == "POST":
         return jsonify({"status": "user is already logged-in"})
     else:
         return jsonify({"error": "method not allowed"})
@@ -120,9 +123,8 @@ def delete_account():
         if request.method == "POST":
             user_email = current_user.email
             logout_user()
-            conn, curr = get_db()
-            query = f"""DELETE FROM user WHERE email = '{user_email}'"""
-            curr.execute(query)
+            conn, curr = database.database_connection()
+            curr.execute(auth_obj.delete_user.format(user_email))
             conn.commit()
             return jsonify({"status": "Account deleted successfully"})
     except Exception as e:

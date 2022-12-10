@@ -2,6 +2,7 @@ import React from 'react'
 import Footer from './Footer'
 import Header from './Header'
 import '../assets/css/about.css'
+import images from '../assets/images.json'
 
 export const About = () => {
     return (
@@ -12,10 +13,25 @@ export const About = () => {
                     <div className="heading" style={{ textAlign: 'center' }}>
                         <h1 className="display-4">About Code Badger</h1>
                     </div>
-                    <div className="para">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non vero modi ducimus illum velit, similique labore. Soluta ut voluptates accusantium eos facere in asperiores quas molestias officia dolorum! Animi eos quis eligendi hic sequi soluta laborum officiis, quos corrupti sit harum minima officia reiciendis totam quod perspiciatis vero consequuntur mollitia sint? Eos dolores enim veniam commodi. Vitae cupiditate eaque voluptas optio enim impedit perferendis exercitationem suscipit
-                    </div>
+                    <div className="para">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Labore, praesentium ipsam nam illo expedita obcaecati officiis nobis ad illum nihil eligendi, et officia atque recusandae error. Quos repellendus est delectus totam doloremque tenetur adipisci, et ipsa autem aut consequuntur hic deleniti maiores quisquam aliquid.</div>
                 </div>
                 <hr />
+                <div className="heading" style={{ textAlign: 'center' }}>
+                    <h1 className="display-7">Meet our team</h1>
+                </div>
+                <p className="card-text" style={{ width: "80%", margin: "auto" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eveniet tempora ratione numquam dolorem earum culpa quis quia, repellat blanditiis.</p>
+                <div className="team">
+                    {images.map((image) => {
+                        return (<div className="card m-5" style={{ width: "18rem" }} key={image.id}>
+                            <img src={image.link} className="card-img-top" alt="Image" style={{ minHeight: "11rem", maxHeight: "11rem" }} />
+                            <div className="card-body">
+                                <h5 className="card-title">{image.name}</h5>
+                                <h6 className="card-subtitle mb-2 text-muted">{image.work}</h6>
+                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            </div>
+                        </div>)
+                    })}
+                </div>
             </div>
             <Footer />
         </>

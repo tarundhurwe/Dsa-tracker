@@ -3,9 +3,31 @@
 }
 
 .about-div .para {
-    width: 60vw;
+    width: 80vw;
     margin: auto;
     font-weight: 400;
+}
+
+.team {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.card-title,
+.card-subtitle {
+    text-align: center;
+}
+
+.card {
+    box-shadow: none;
+}
+
+.display-7 {
+    background: -webkit-linear-gradient(#198754, #63D471);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 

@@ -2,6 +2,8 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
 from flask_login import LoginManager
+import string
+import random
 
 db = SQLAlchemy()
 DB_NAME = "database.db"
@@ -9,7 +11,9 @@ DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
-    app.config["SECRET_KEY"] = "asjdhbashbd"
+    app.config["SECRET_KEY"] = "".join(
+        random.choices(string.ascii_lowercase + string.digits, k=15)
+    )
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_NAME}"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["JSON_SORT_KEYS"] = False

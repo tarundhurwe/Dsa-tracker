@@ -1,13 +1,12 @@
 from flask import Blueprint, jsonify
 from flask_login import current_user
-import sqlite3 as sql
-from os.path import join, dirname
 from .db_connection import DatabaseConnection
-
-views = Blueprint("views", __name__)
-
+from constants.views_constant import ViewsObject
 
 db = DatabaseConnection()
+views_obj = ViewsObject()
+views = Blueprint("views", __name__)
+
 """ Views for problems """
 
 """ Return list of names of available problem sets"""
@@ -17,20 +16,19 @@ db = DatabaseConnection()
 def problem_sets():
     try:
         available_problem_sets = []
-        _, curr = db.database_connection()
-        curr.execute("""SELECT DISTINCT problem_set_name FROM problems""")
-        data = curr.fetchall()
+        _, cur = db.database_connection()
+        cur.execute(views_obj.distinct_problem_sets)
+        data = cur.fetchall()
         for i in range(len(data)):
-            query = f"SELECT * FROM problems WHERE problem_set_name = '{data[i][0]}'"
-            curr.execute(query)
-            num_questions = curr.fetchall()
+            cur.execute(views_obj.problem_set_name.format(data[i][0]))
+            num_questions = cur.fetchall()
             available_problem_sets.append(
                 {"id": i + 1, "name": data[i][0], "total": len(num_questions)}
             )
         json_data = jsonify(available_problem_sets)
     except Exception as e:
-        json_data = jsonify({"ERROR": "Some error occurred"})
-    json_data.headers.add("Access-Control-Allow-Origin", "*")
+        json_data = jsonify({"ERROR": f"Some error occurred {e}"})
+    json_data.headers.add(views_obj.json_header, "*")
     return json_data
 
 
@@ -40,9 +38,8 @@ def problem_sets():
 @views.route("/all")
 def home():
     _, cur = db.database_connection()
-    cur.execute("""SELECT * FROM problems""")
+    cur.execute(views_obj.all_problems)
     data = cur.fetchall()
-    print(data[0])
     problems = [
         {
             "id": ele[0],
@@ -54,7 +51,7 @@ def home():
         for ele in data
     ]
     json_data = jsonify(problems)
-    json_data.headers.add("Access-Control-Allow-Origin", "*")
+    json_data.headers.add(views_obj.json_header, "*")
     return json_data
 
 
@@ -72,15 +69,12 @@ def sort_by_problem_set(name, tag):
                 }
             )
 
-        name = name.lower()
-        if tag:
-            tag = tag.title()
-            query = f"SELECT * FROM problems WHERE problem_set_name = '{name}' and tag = '{tag}'"
-        else:
-            query = f"SELECT * FROM problems WHERE problem_set_name = '{name}'"
-
         _, cur = db.database_connection()
-        cur.execute(query)
+        cur.execute(
+            views_obj.selected_problem_set_with_tag.format(name.lower(), tag.title())
+            if tag
+            else views_obj.selected_problem_set.format(name.lower())
+        )
         data = cur.fetchall()
         problems = [
             {
@@ -103,4 +97,4 @@ def sort_by_problem_set(name, tag):
             )
         )
     except Exception as e:
-        return jsonify({"Error": e})
+        return jsonify({"Error": f"Some error occurred {e}"})

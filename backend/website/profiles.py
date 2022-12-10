@@ -10,7 +10,5 @@ db = DatabaseConnection()
 
 @profile.route("/")
 def home():
-    _, curr = db.database_connection()
-    curr.execute("SELECT * FROM problems")
-    data = curr.fetchall()
+    data = "working"
     return f"{data}"
