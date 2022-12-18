@@ -20,17 +20,19 @@ export const About = () => {
                     <h1 className="display-7">Meet our team</h1>
                 </div>
                 <p className="card-text" style={{ width: "80%", margin: "auto" }}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto eveniet tempora ratione numquam dolorem earum culpa quis quia, repellat blanditiis.</p>
-                <div className="team">
-                    {images.map((image) => {
-                        return (<div className="card m-5" style={{ width: "18rem" }} key={image.id}>
-                            <img src={image.link} className="card-img-top" alt="Image" style={{ minHeight: "11rem", maxHeight: "11rem" }} />
-                            <div className="card-body">
-                                <h5 className="card-title">{image.name}</h5>
-                                <h6 className="card-subtitle mb-2 text-muted">{image.work}</h6>
-                                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            </div>
-                        </div>)
-                    })}
+                <div className="team-class" style={{ display: 'block' }}>
+                    <div className="team">
+                        {images.map((image) => {
+                            return (<div className="card m-5" style={{ width: "18rem" }} key={image.id}>
+                                <img src={image.link} className="card-img-top" alt="Image" style={{ minHeight: "11rem", maxHeight: "11rem" }} />
+                                <div className="card-body">
+                                    <h5 className="card-title">{image.name}</h5>
+                                    <h6 className="card-subtitle mb-2 text-muted">{image.work}</h6>
+                                    <p className="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, explicabo. Lorem ipsum dolor sit amet.</p>
+                                </div>
+                            </div>)
+                        })}
+                    </div>
                 </div>
             </div>
             <Footer />

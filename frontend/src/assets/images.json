@@ -3,12 +3,14 @@
         "id": 1,
         "name": "Bro",
         "work": "working somewhere",
-        "link": "/src/assets/images/kakashi hatake.jpg"
+        "link": "/src/assets/images/kakashi hatake.jpg",
+        "github": "https://github.com/harshitaHD?tab=repositories"
     },
     {
         "id": 2,
         "name": "Me",
         "work": "working somewhere",
-        "link": "/src/assets/images/madara uchiha.jpg"
+        "link": "/src/assets/images/madara uchiha.jpg",
+        "github": "https://github.com/tarundhurwe?tab=repositories"
     }
 ]

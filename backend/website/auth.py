@@ -88,7 +88,7 @@ def signup():
         password = user_signup_data["password"]
         first_name = user_signup_data["first name"]
         last_name = user_signup_data["last name"]
-        if user := User.query.filter_by(email=email).first():
+        if User.query.filter_by(email=email).first():
             return jsonify(
                 {"status": "Email is already in use. Please use different email."}
             )

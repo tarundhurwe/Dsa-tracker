@@ -1,3 +1,115 @@
 .profile-div {
-    min-height: 80vh;
+    min-height: auto;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+    overflow-y: scroll;
+    overflow: hidden;
+    min-height: auto;
+}
+
+.toggle-button {
+    display: flex;
+}
+
+.toggle1 {
+    height: 4vh;
+    width: 14vw;
+    padding: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #106e42;
+    color: white;
+    border-radius: 0px;
+}
+
+.toggle2 {
+    height: 4vh;
+    width: 14vw;
+    padding: 3vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #198754;
+    color: white;
+    border-radius: 0px;
+}
+
+.login {
+    display: block;
+    padding: 0px !important;
+}
+
+.form {
+    padding: 2vh;
+    width: 28vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-radius: 0px;
+}
+
+.log-form {
+    margin: 1vh;
+    display: flex;
+    flex-wrap: no-wrap;
+}
+
+.log-form input {
+    padding: 1vh;
+    width: 20vw;
+}
+
+.signup {
+    display: none;
+    padding: 0px !important;
+}
+
+@media (max-width:800px) {
+    .toggle1 {
+        width: 25vw;
+    }
+
+    .toggle2 {
+        width: 25vw;
+    }
+
+    .form {
+        width: calc(25vw + 25vw);
+    }
+
+    .log-form input {
+        padding: 1vh;
+        width: 40vw;
+    }
+}
+
+@media (max-width:500px) {
+    .toggle1 {
+        height: 50px;
+        width: 45vw;
+    }
+
+    .toggle2 {
+        height: 50px;
+        width: 45vw;
+    }
+
+    .form {
+        width: calc(45vw + 45vw);
+    }
+
+    .log-form input {
+        padding: 2vh;
+        width: 70vw;
+    }
 }
