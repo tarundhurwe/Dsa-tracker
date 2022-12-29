@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { About } from './components/About';
 import { Contact } from './components/Contact';
 import { Profile } from './components/Profile';
+import { Problems } from './components/Problems';
 
 function App() {
   const websiteName = "Code Badger"
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/about" element={<About />} />
           <Route exact path="/contact" element={<Contact />} />
           <Route exact path="/profile" element={<Profile />} />
+          <Route exact path="/problems" element={<Problems />} />
         </Routes>
       </Router>
     </>

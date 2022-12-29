@@ -62,13 +62,6 @@ def home():
 @views.route("/<string:name>/<string:tag>")
 def sort_by_problem_set(name, tag):
     try:
-        if not current_user.is_authenticated:
-            return jsonify(
-                {
-                    "Unauthorized": "The server could not verify that you are authorized to access the URL requested. You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required."
-                }
-            )
-
         _, cur = db.database_connection()
         cur.execute(
             views_obj.selected_problem_set_with_tag.format(name.lower(), tag.title())
@@ -76,18 +69,22 @@ def sort_by_problem_set(name, tag):
             else views_obj.selected_problem_set.format(name.lower())
         )
         data = cur.fetchall()
-        problems = [
-            {
-                "id": ele[0],
-                "problemset": ele[4],
-                "category": ele[1],
-                "problem": ele[2],
-                "link": ele[3],
-            }
-            for ele in data
-        ]
+        count = 1
+        problems = []
+        for ele in data:
+            problems.append(
+                {
+                    "count": count,
+                    "id": ele[0],
+                    "problemset": ele[4],
+                    "category": ele[1],
+                    "problem": ele[2],
+                    "link": ele[3],
+                }
+            )
+            count += 1
 
-        return (
+        json_data = (
             jsonify(problems)
             if len(problems)
             else jsonify(
@@ -97,4 +94,7 @@ def sort_by_problem_set(name, tag):
             )
         )
     except Exception as e:
-        return jsonify({"Error": f"Some error occurred {e}"})
+        json_data = jsonify({"Error": f"Some error occurred {e}"})
+
+    json_data.headers.add(views_obj.json_header, "*")
+    return json_data

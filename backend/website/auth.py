@@ -43,22 +43,40 @@ signup_schema = {
 @auth.route("/login", methods=["GET", "POST"])
 @expects_json(login_schema)
 def login():
-    if request.method == "POST" and not current_user.is_authenticated:
-        login_data = request.get_json()
-        email = login_data["email"]
-        password = login_data["password"]
-        if user := User.query.filter_by(email=email).first():
-            if check_password_hash(user.password, password):
-                login_user(user, remember=True)
-                return jsonify({"status": "logged in successfully"})
+    try:
+        json_data = ""
+        if request.method == "POST" and not current_user.is_authenticated:
+            login_data = request.get_json()
+            email = login_data["email"]
+            password = login_data["password"]
+            if user := User.query.filter_by(email=email).first():
+                if check_password_hash(user.password, password):
+                    login_user(user, remember=True)
+                    json_data = jsonify(
+                        {"status": "logged in successfully", "is_authenticated": True}
+                    )
+                else:
+                    json_data = jsonify(
+                        {"status": "incorrect password", "is_authenticated": False}
+                    )
             else:
-                return jsonify({"status": "incorrect password"})
+                json_data = jsonify(
+                    {"status": "user doesn't exist", "is_authenticated": False}
+                )
+        elif request.method == "POST":
+            json_data = jsonify(
+                {"status": "user is already logged-in", "is_authenticated": True}
+            )
         else:
-            return jsonify({"status": "user doesn't exist"})
-    elif request.method == "POST":
-        return jsonify({"status": "user is already logged-in"})
-    else:
-        return jsonify({"error": "method not allowed"})
+            json_data = jsonify(
+                {"error": "method not allowed", "is_authenticated": False}
+            )
+    except Exception as e:
+        json_data = jsonify(
+            {"error": "Error occurred please try again", "is_authenticated": False}
+        )
+    json_data.headers.add("Access-Control-Allow-Origin", "*")
+    return json_data
 
 
 """ api to handle logout """
@@ -129,3 +147,14 @@ def delete_account():
             return jsonify({"status": "Account deleted successfully"})
     except Exception as e:
         return jsonify({"status": f"Failed to delete account {e}"})
+
+
+@auth.route("/verified", methods=["GET"])
+def is_authenticated():
+    json_data = ""
+    if request.method == "GET":
+        if current_user.is_authenticated:
+            json_data = jsonify({"verified": True})
+        json_data = jsonify({"verified": False})
+    json_data.headers.add("Access-Control-Allow-Origin", "*")
+    return json_data

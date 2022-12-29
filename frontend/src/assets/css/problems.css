@@ -1,0 +1,46 @@
+.dispdiv {
+    min-width: 50%;
+    margin: auto;
+}
+
+.problem-set-name {
+    font-weight: 800;
+    background: -webkit-linear-gradient(#198754, #63D471);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-style: italic;
+}
+
+.problem-div {
+    width: 20rem;
+}
+
+.problem-num {
+    width: 5rem;
+    text-align: center;
+}
+
+
+.problem-link {
+    width: 40rem;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.problem-link a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
+.notes {
+    width: 10rem;
+    text-align: right;
+}
+
+.status {
+    width: 10rem;
+    text-align: right;
+}
